@@ -1,46 +1,53 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { siteContent } from "@/data/content";
+import Container from "@/components/Container";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-black text-brand-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <span className="text-xl font-bold text-brand-gold">
-          {siteContent.business.name}
-        </span>
+    <header className="sticky top-0 z-50 bg-brand-dark text-brand-white">
+      <Container className="flex items-center justify-between py-3">
+        <Link href="/" className="shrink-0">
+          <Image
+            src={siteContent.business.logo}
+            alt={siteContent.business.name}
+            width={280}
+            height={100}
+            className="h-16 w-auto md:h-24"
+            priority
+          />
+        </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden gap-8 md:flex">
           {siteContent.nav.map((item) => (
-            <a key={item.href} href={item.href} className="hover:text-brand-gold">
+            <a key={item.href} href={item.href} className="text-lg font-medium hover:text-brand-gold">
               {item.label}
             </a>
           ))}
         </nav>
 
-        <a
-          href={`tel:${siteContent.business.phones.primary}`}
-          className="hidden rounded bg-brand-green px-4 py-2 font-semibold md:block hover:bg-brand-green-light"
+        <Link
+          href="/quote"
+          className="hidden rounded bg-brand-gold px-5 py-2 font-semibold text-brand-dark md:block hover:bg-brand-gold/90"
         >
-          {siteContent.business.phones.primary}
-        </a>
+          Get a Free Quote
+        </Link>
 
-        {/* Mobile toggle */}
         <button
-        className="md:hidden"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Toggle menu"
-        aria-expanded={isMenuOpen}
+          className="md:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
         >
-        ☰
+          ☰
         </button>
-      </div>
+      </Container>
 
-      {/* Mobile nav */}
       {isMenuOpen && (
         <nav className="flex flex-col gap-4 border-t border-brand-green px-6 py-4 md:hidden">
           {siteContent.nav.map((item) => (
@@ -48,9 +55,16 @@ export default function Header() {
               {item.label}
             </a>
           ))}
+          <Link
+            href="/quote"
+            onClick={() => setIsMenuOpen(false)}
+            className="rounded bg-brand-gold px-4 py-2 text-center font-semibold text-brand-dark"
+          >
+            Get a Free Quote
+          </Link>
           <a
             href={`tel:${siteContent.business.phones.primary}`}
-            className="hidden rounded bg-brand-green px-4 py-2 font-semibold md:block hover:bg-brand-green-light"
+            className="rounded bg-brand-green px-4 py-2 text-center font-semibold"
           >
             {siteContent.business.phones.primary}
           </a>

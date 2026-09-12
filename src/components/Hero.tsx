@@ -1,26 +1,32 @@
-import { siteContent } from "@/data/content";
 import Image from "next/image";
+import Link from "next/link";
+import { siteContent } from "@/data/content";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-brand-black text-brand-white md:min-h-[85vh]">
-      {/* Background photo placeholder — swap for next/image with `fill` once you have a real photo */}
+    <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-brand-dark text-brand-white md:min-h-[85vh]">
       <Image
         src="/images/hero2.jpg"
         alt="Completed landscaping project"
         fill
+        sizes="100vw"
         className="object-cover"
         priority
-        />
+      />
 
-      {/* Gradient overlay: keeps the headline readable over a busy photo */}
       <div
-        className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/70 to-brand-black/30"
+        className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/70 to-brand-dark/30"
         aria-hidden="true"
       />
 
-      {/* Content sits above both layers via z-10 */}
       <div className="relative z-10 mx-auto max-w-3xl px-6">
+        <Image
+          src={siteContent.business.logo}
+          alt={siteContent.business.name}
+          width={500}
+          height={180}
+          className="mb-6 h-40 w-auto md:h-64"
+        />
         <h1 className="font-display text-4xl leading-tight font-semibold md:text-6xl">
           {siteContent.business.tagline}
         </h1>
@@ -31,16 +37,16 @@ export default function Hero() {
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href={`tel:${siteContent.business.phones.primary}`}
-            className="rounded bg-brand-gold px-6 py-3 font-semibold text-brand-black hover:bg-brand-gold/90"
+            className="rounded bg-brand-gold px-6 py-3 font-semibold text-brand-dark hover:bg-brand-gold/90"
           >
             Call {siteContent.business.phones.primary}
           </a>
-          <a
-            href="#services"
+          <Link
+            href="/quote"
             className="rounded border border-brand-white/30 px-6 py-3 font-semibold hover:border-brand-white"
           >
-            View services
-          </a>
+            Get a Free Quote
+          </Link>
         </div>
       </div>
     </section>

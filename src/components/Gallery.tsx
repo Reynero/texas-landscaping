@@ -14,7 +14,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="bg-brand-cream py-20">
       <Container>
-        <h2 className="font-display text-3xl font-semibold text-brand-black md:text-4xl">
+        <h2 className="font-display text-3xl font-semibold text-brand-dark md:text-4xl">
           Recent work
         </h2>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -24,6 +24,7 @@ export default function Gallery() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                 className="object-cover"
               />
             </div>

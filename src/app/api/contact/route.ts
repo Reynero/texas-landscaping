@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { name, phone, message } = await request.json();
+    const { name, phone, email, address, service, message } = await request.json();
 
     if (!name || !phone) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -13,9 +13,9 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "reynero96@gmail.com", 
+      to: "your-email@example.com",
       subject: `New quote request from ${name}`,
-      text: `Name: ${name}\nPhone: ${phone}\nMessage: ${message || "(none)"}`,
+      text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email || "(not provided)"}\nAddress: ${address || "(not provided)"}\nService: ${service || "(not specified)"}\nMessage: ${message || "(none)"}`,
     });
 
     return NextResponse.json({ success: true });
